@@ -29,6 +29,5 @@ def extract_pages(text, page_range):
         page_number = cnt
         if page_number in page_range:
             selected_pages.append(content.strip())
-        cnt += 1
         
     return ' '.join(selected_pages)
