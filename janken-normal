@@ -1,0 +1,79 @@
+import numpy as np
+import PySimpleGUI as sg
+
+def judgement(your_num, cpu_num):
+
+    if your_num == 0:
+        if cpu_num == 0:
+            # print("あいこです")
+            result ="あいこです"
+        elif cpu_num == 1:
+            result ="あなたの勝ちです"
+        elif cpu_num == 2:
+            result ="あなたの負けです"
+
+    if your_num == 1:
+        if cpu_num == 1:
+            result ="あいこです"
+        elif cpu_num == 2:
+            result ="あなたの勝ちです"
+        elif cpu_num == 0:
+            result ="あなたの負けです"
+
+    if your_num == 2:
+        if cpu_num == 2:
+            result ="あいこです"
+        elif cpu_num == 0:
+            result ="あなたの勝ちです"
+        elif cpu_num == 1:
+            result ="あなたの負けです"
+
+    return result
+
+font = ("meiryo", 16)
+size = (10,2)
+size_result = (20,2)
+
+layout = [
+
+    [sg.Radio("グー", font=font, size=size, group_id = "choice", key="gu"),
+     sg.Radio("チョキ", font=font, size=size, group_id = "choice", key="choki"),
+     sg.Radio("パー", font=font, size=size, group_id = "choice", key="pa")],
+
+    [sg.Button("対戦", font=font, size=size, key="judge")],
+    [sg.Text("CPU：", font=font, size=size), sg.Text("", size=size_result,  font=font, key = "CPU")],
+    [sg.Text("あなた：", font=font, size=size), sg.Text("", size=size_result,  font=font, key = "YOU")],
+    [sg.Text("対戦結果：", font=font, size=size), sg.Text("", size=size_result,  font=font, key = "result")]
+
+]
+
+window = sg.Window("janken app", layout)
+
+while True:
+    event, values = window.read()
+
+    if event is None:
+        break
+
+    if event == "judge":
+
+        # 対応リスト
+        choice = {0: "グー", 1: "チョキ", 2: "パー"}
+
+        # あなたの手
+        if values["gu"] == True:
+            your_num = 0
+        if values["choki"] == True:
+            your_num = 1
+        if values["pa"] == True:
+            your_num = 2
+
+        # CPUの手
+        cpu_num = np.random.randint(0, 3)
+        result = judgement(your_num, cpu_num)
+
+        window["CPU"].update(choice[cpu_num])
+        window["YOU"].update(choice[your_num])
+        window["result"].update(result)
+
+window.close()
