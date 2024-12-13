@@ -31,5 +31,5 @@ jobs:
           debug: true
           review_comment_lgtm: false
           openai_light_model: gpt-4o-mini
-          openai_heavy_model: gpt-40-mini
+          openai_heavy_model: gpt-4o-mini
           language: ja-JP
