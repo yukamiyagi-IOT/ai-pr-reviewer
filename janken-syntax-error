@@ -3,8 +3,8 @@ import PySimpleGUI as sg
 
 def judgement(your_num, cpu_num):
 
-    if your_num == 0
-        if cpu_num == 0
+    if your_num == 0:
+        if cpu_num == 0:
             # print("あいこです")
             result ="あいこです"
         elif cpu_num == 1:
