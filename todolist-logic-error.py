@@ -22,15 +22,16 @@ class TodoList:
         self.todos.append(new_task)
 
     def remove_task(self, task_index):
-        # ロジックエラー: インデックスのチェックをしない
-        # インデックスが範囲外でも削除してしまう
-        print(f"タスク '{self.todos[task_index].task}' を削除しました。")  # ここでエラーが発生する可能性あり
-        self.todos.pop(task_index)
+        if 0 <= task_index < len(self.todos):
+            self.todos.pop(task_index)
+        else:
+            print("無効なインデックスです。")
 
     def mark_task_completed(self, task_index):
-        # ロジックエラー: 完了したタスクを完了済みにする処理がない
-        self.todos[task_index].mark_completed()
-        print(f"タスク '{self.todos[task_index].task}' を完了にしました。")
+        if 0 <= task_index < len(self.todos):
+            self.todos[task_index].mark_completed()
+        else:
+            print("無効なインデックスです。")
 
     def show_tasks(self):
         if not self.todos:
@@ -79,11 +80,27 @@ def main():
             todo_list.show_tasks()
             try:
                 task_index = int(input("削除するタスクの番号を入力してください: ")) - 1
-                # ここでインデックスが範囲外でもエラーを出さずに削除されてしまう
                 todo_list.remove_task(task_index)
             except ValueError:
                 print("無効な入力です。")
         elif choice == '3':
             todo_list.show_tasks()
             try:
-            
+                task_index = int(input("完了するタスクの番号を入力してください: ")) - 1
+                todo_list.mark_task_completed(task_index)
+            except ValueError:
+                print("無効な入力です。")
+        elif choice == '4':
+            todo_list.show_tasks()
+        elif choice == '5':
+            todo_list.show_completed_tasks()
+        elif choice == '6':
+            todo_list.show_incomplete_tasks()
+        elif choice == '7':
+            print("終了します。")
+            break
+        else:
+            print("無効な選択肢です。")
+
+if __name__ == "__main__":
+    main()
