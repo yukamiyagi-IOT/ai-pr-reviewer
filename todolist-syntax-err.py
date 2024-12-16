@@ -55,7 +55,7 @@ class TodoList:
 
 # メニューの表示
 def print_menu():
-    prnt("\n===== Todoリスト =====")
+    print("\n===== Todoリスト =====")
     print("1. タスクを追加")
     print("2. タスクを削除")
     print("3. タスクを完了にする")
